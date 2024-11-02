@@ -22,13 +22,13 @@ Ez az időnyilvántartó rendszer lehetővé teszi a felhasználók számára, h
 git clone <repository-url>
 
 
-## git clone <repository-url>
-3. Navigálj a projekt mappájába:
-## cd my-time-tracker
-4. Telepítsd a szükséges csomagokat:
-## npm install
-5. Indítsd el a fejlesztői szervert:
-## npm run serve
+ git clone <repository-url>
+3. ## Navigálj a projekt mappájába:
+cd my-time-tracker
+4. ## Telepítsd a szükséges csomagokat:
+npm install
+5. ## Indítsd el a fejlesztői szervert:
+npm run serve
 6. Nyisd meg a böngészőt, és látogass el a `http://localhost:8080` címre a projekt megtekintéséhez.
 
 
