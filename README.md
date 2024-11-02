@@ -16,12 +16,30 @@ Ez az időnyilvántartó rendszer lehetővé teszi a felhasználók számára, h
 - **Tailwind CSS:** A stílusok kezelésére.
 - **Local Storage:** Az adatok tárolására a böngészőben.
 
+## Telepítési útmutató
+1. Győződj meg róla, hogy telepítve van a Node.js és a Vue CLI a rendszereden.
+2. Klónozd a projektet a GitHub-ról:
+git clone <repository-url>
+
+
+## css Kód másolása
+3. Navigálj a projekt mappájába:
+## cd my-time-tracker
+4. Telepítsd a szükséges csomagokat:
+## npm install
+5. Indítsd el a fejlesztői szervert:
+## npm run serve
+6. Nyisd meg a böngészőt, és látogass el a `http://localhost:8080` címre a projekt megtekintéséhez.
+
+
 ## Licenc
-Ez a projekt kizárólag egy munkahelyi felvételi teszt céljára készült, és nem használható fel más célokra. 
+Ez a projekt kizárólag egy munkahelyi felvételi teszt céljára készült, és nem használható fel más célokra.
 
 ## Kapcsolat
 Ha bármilyen kérdése van, kérem, lépjen kapcsolatba velem az alábbi e-mail címen: 
 [david.vasadi@icloud.com](mailto:david.vasadi@icloud.com)
+
+
 
 # my-time-tracker
 
@@ -40,6 +58,18 @@ This time tracking system allows users to monitor their work, tasks, and duratio
 - **Vue.js:** The frontend framework.
 - **Tailwind CSS:** For styling.
 - **Local Storage:** For data storage in the browser.
+
+## Installation Guide
+1. Ensure that Node.js and Vue CLI are installed on your system.
+2. Clone the project from GitHub:
+## git clone <repository-url>
+3. Navigate to the project folder:
+## cd my-time-tracker
+4. Install the required packages:
+## npm install
+5. Start the development server:
+## npm run serve
+6. Open your browser and go to `http://localhost:8080` to view the project.
 
 ## License
 This project was created solely for the purpose of a job application test and cannot be used for any other purposes.
