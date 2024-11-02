@@ -22,7 +22,7 @@ Ez az időnyilvántartó rendszer lehetővé teszi a felhasználók számára, h
 git clone <repository-url>
 
 
-## css Kód másolása
+## git clone <repository-url>
 3. Navigálj a projekt mappájába:
 ## cd my-time-tracker
 4. Telepítsd a szükséges csomagokat:
