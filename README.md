@@ -22,10 +22,10 @@ Ez az időnyilvántartó rendszer lehetővé teszi a felhasználók számára, h
 git clone <repository-url>
 
 
-## css Kód másolása
+## git clone <repository-url>
 3. Navigálj a projekt mappájába:
 ## cd my-time-tracker
-4. Telepítsd a szükséges csomagokat:
+4. Telepítsd a szükséges csomagoka npm használatával:
 ## npm install
 5. Indítsd el a fejlesztői szervert:
 ## npm run serve
@@ -65,7 +65,7 @@ This time tracking system allows users to monitor their work, tasks, and duratio
 ## git clone <repository-url>
 3. Navigate to the project folder:
 ## cd my-time-tracker
-4. Install the required packages:
+4. Install Required Packages using npm:
 ## npm install
 5. Start the development server:
 ## npm run serve
