@@ -1,0 +1,5 @@
+https://github.com/davidvasadi/my-time-tracker
+
+npm telepítés szükséges
+
+Tudtam volna még nagyon sok mindent csinálni rajta ,a diagram elkészítése nem lett végleges. 
