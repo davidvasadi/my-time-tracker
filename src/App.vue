@@ -1,61 +1,62 @@
 <template>
-  <div class="max-w-4xl mx-auto p-6">
-    <h1 class="text-2xl font-bold mb-6">Időnyilvántartó rendszer</h1>
-    <TimeEntryForm 
-      @submit="handleFormSubmit" 
-      ref="entryForm" 
-      :isEdit="isEdit" 
-      :entry="currentEntry" 
-    />
+  <div class="bg-zinc-50">
+    <div class="max-w-4xl mx-auto p-6 bg-zinc-50">
+      <h1 class="text-2xl font-bold mb-6 flex justify-center">Időnyilvántartó rendszer</h1>
+      <TimeEntryForm @submit="handleFormSubmit" ref="entryForm" :isEdit="isEdit" :entry="currentEntry" />
+      <!-- Nézet kiválasztása && Szűrés címkére-->
+      <div class="flex items-center justify-between">
+        <!-- Nézet kiválasztása -->
+        <div class="mt-6 mb-4">
+          <label for="viewType" class="mr-2">Nézet:</label>
+          <select v-model="viewType" id="viewType" class="p-2 border border-gray-300 rounded">
+            <option value="daily">Napi</option>
+            <option value="weekly">Heti</option>
+            <option value="monthly">Havi</option>
+          </select>
+        </div>
 
-    <!-- Nézet kiválasztása -->
-    <div class="mt-6 mb-4">
-      <label for="viewType" class="mr-2">Nézet:</label>
-      <select v-model="viewType" id="viewType" class="p-2 border border-gray-300 rounded">
-        <option value="daily">Napi</option>
-        <option value="weekly">Heti</option>
-        <option value="monthly">Havi</option>
-      </select>
-    </div>
-
-    <!-- Szűrés címkére -->
-    <div class="mb-4">
-      <label for="tagFilter" class="mr-2">Szűrés címkére:</label>
-      <select v-model="tagFilter" id="tagFilter" class="p-2 border border-gray-300 rounded">
-        <option value="">Összes</option>
-        <option value="projekt">Projekt</option>
-        <option value="ügyfél">Ügyfél</option>
-      </select>
-    </div>
-
-    <!-- Bejegyzések -->
-    <div class="mt-6">
-      <h2 class="text-xl font-semibold">Bejegyzések</h2>
-      <div v-if="Object.keys(filteredEntries).length === 0" class="mt-4">
-        <p>Nincsenek bejegyzések.</p>
-      </div>
-      <div v-for="(userEntries, userName) in filteredEntries" :key="userName" class="mb-4">
-        <div v-for="(entry, index) in userEntries" :key="index" class="border p-4 mt-2 rounded">
-          <p><strong>Munkavállaló neve:</strong> {{ entry.userName }}</p>
-          <p><strong>Dátum:</strong> {{ entry.date }}</p>
-          <p><strong>Kezdési idő:</strong> {{ entry.startTime }}</p>
-          <p><strong>Befejezési idő:</strong> {{ entry.endTime }}</p>
-          <p><strong>Feladat leírása:</strong> {{ entry.taskDescription }}</p>
-          <p><strong>Címkék:</strong> <span v-if="entry.tags.length">{{ entry.tags }}</span><span v-else>Nincsenek címkék.</span></p>
-          <button @click="editEntry(entry, userName, index)" class="mt-2 bg-yellow-500 hover:bg-yellow-700 text-white p-2 rounded">Módosítás</button>
-          <button @click="deleteEntry(userName, index)" class="mt-2 mx-2 bg-red-500 hover:bg-red-700 text-white p-2 rounded">Törlés</button>
+        <!-- Szűrés címkére -->
+        <div class="mt-6 mb-4">
+          <label for="tagFilter" class="mr-2">Szűrés címkére:</label>
+          <select v-model="tagFilter" id="tagFilter" class="p-2 border border-gray-300 rounded">
+            <option value="">Összes</option>
+            <option value="projekt">Projekt</option>
+            <option value="ügyfél">Ügyfél</option>
+          </select>
         </div>
       </div>
-    </div>
+      <!-- Bejegyzések -->
+      <div class="mt-6">
+        <h2 class="text-xl font-semibold">Bejegyzések</h2>
+        <div v-if="Object.keys(filteredEntries).length === 0" class="mt-4 ">
+          <p>Nincsenek bejegyzések.</p>
+        </div>
+        <div v-for="(userEntries, userName) in filteredEntries" :key="userName" class="mb-4 bg-white rounded-2xl">
+          <div v-for="(entry, index) in userEntries" :key="index" class="border p-4 mt-2 rounded">
+            <p><strong>Munkavállaló neve:</strong> {{ entry.userName }}</p>
+            <p><strong>Dátum:</strong> {{ entry.date }}</p>
+            <p><strong>Kezdési idő:</strong> {{ entry.startTime }}</p>
+            <p><strong>Befejezési idő:</strong> {{ entry.endTime }}</p>
+            <p><strong>Feladat leírása:</strong> {{ entry.taskDescription }}</p>
+            <p><strong>Címkék:</strong> <span v-if="entry.tags.length">{{ entry.tags }}</span><span v-else>Nincsenek
+                címkék.</span></p>
+            <button @click="editEntry(entry, userName, index)"
+              class="mt-2 bg-yellow-500 hover:bg-yellow-700 text-white p-2 rounded">Módosítás</button>
+            <button @click="deleteEntry(userName, index)"
+              class="mt-2 mx-2 bg-red-500 hover:bg-red-700 text-white p-2 rounded">Törlés</button>
+          </div>
+        </div>
+      </div>
 
-    <!-- MyStatistics komponens -->
-    <MyStatistics :entries="filteredEntries" v-if="filteredEntries && Object.keys(filteredEntries).length" />
+      <!-- MyStatistics komponens -->
+      <MyStatistics :entries="filteredEntries" v-if="filteredEntries && Object.keys(filteredEntries).length" />
 
-    <!-- Értesítések (toast) -->
-    <div class="fixed top-0 right-0 p-4">
-      <div v-for="(toast, index) in toasts" :key="index" :class="['toast', toast.type]">
-        {{ toast.message }}
-        <button @click="removeToast(index)" class="ml-2 bg-transparent border-0 cursor-pointer">X</button>
+      <!-- Értesítések (toast) -->
+      <div class="fixed top-0 right-0 p-4">
+        <div v-for="(toast, index) in toasts" :key="index" :class="['toast', toast.type]">
+          {{ toast.message }}
+          <button @click="removeToast(index)" class="ml-2 bg-transparent border-0 cursor-pointer">X</button>
+        </div>
       </div>
     </div>
   </div>
@@ -63,7 +64,7 @@
 
 <script>
 import TimeEntryForm from './components/TimeEntryForm.vue';
-import MyStatistics from './components/MyStatistics.vue'; // Győződj meg róla, hogy ezt importálod
+import MyStatistics from './components/MyStatistics.vue'; 
 
 export default {
   components: {
@@ -130,27 +131,27 @@ export default {
     },
     editEntry(entry, userName, index) {
       this.currentEntry = { ...entry };
-      this.isEdit = true; 
-      this.currentUserName = userName; 
-      this.currentEntryIndex = index; 
-      this.$refs.entryForm.formData = { ...entry }; 
-      this.scrollToTop(); 
+      this.isEdit = true;
+      this.currentUserName = userName;
+      this.currentEntryIndex = index;
+      this.$refs.entryForm.formData = { ...entry };
+      this.scrollToTop();
     },
     deleteEntry(userName, index) {
       this.entries[userName].splice(index, 1);
       if (this.entries[userName].length === 0) {
-        delete this.entries[userName]; 
+        delete this.entries[userName];
       }
       localStorage.setItem('entries', JSON.stringify(this.entries));
-      this.addToast('Bejegyzés törölve!', 'error'); 
+      this.addToast('Bejegyzés törölve!', 'error');
     },
     scrollToTop() {
-      window.scrollTo(0, 0); 
+      window.scrollTo(0, 0);
     },
     addToast(message, type) {
       this.toasts.push({ message, type });
       setTimeout(() => {
-        this.removeToast(this.toasts.length - 1); 
+        this.removeToast(this.toasts.length - 1);
       }, 3000);
     },
     removeToast(index) {
@@ -164,9 +165,11 @@ export default {
 .toast {
   @apply p-2 mb-2 rounded shadow-md;
 }
+
 .toast.success {
   @apply bg-green-100 text-green-800;
 }
+
 .toast.error {
   @apply bg-red-100 text-red-800;
 }

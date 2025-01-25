@@ -1,12 +1,11 @@
-
-<!-- Az alábbi komponens nem készült el -->
-
 <template>
-  <div class="mt-6">
-    <h2 class="text-xl font-semibold">Statisztikák</h2>
+  <div class="mt-6 max-w-4xl mx-auto">
+    <h2 class="text-xl font-semibold mb-2">Statisztikák</h2>
     <div v-if="totalEntries > 0">
       <p>Összes bejegyzés: {{ totalEntries }}</p>
-      <canvas ref="entriesChart"></canvas>
+      <div class="relative w-full">
+        <canvas ref="entriesChart"></canvas>
+      </div>
     </div>
     <div v-else>
       <p>Nincsenek bejegyzések a statisztikákhoz.</p>
@@ -28,24 +27,39 @@ export default {
   setup(props) {
     const totalEntries = ref(0);
     const entriesChart = ref(null);
-    let chartInstance = null; // A Chart példány tárolására
+    let chartInstance = null;
 
     const createChart = () => {
       if (chartInstance) {
-        chartInstance.destroy(); // Az előző diagram eltávolítása
+        chartInstance.destroy(); // Előző diagram eltávolítása
       }
 
-      if (!entriesChart.value) return; // Ellenőrizzük, hogy a ref elérhető
+      if (!entriesChart.value) return;
 
       const ctx = entriesChart.value.getContext('2d');
+
       if (ctx) {
+        // Kulcsok és értékek szűrése
+        const validEntries = Object.entries(props.entries).filter(([key, value]) => {
+          return (
+            key !== undefined &&
+            key !== null &&
+            key !== '' &&
+            Array.isArray(value) &&
+            value.length > 0
+          );
+        });
+
+        const labels = validEntries.map(([key]) => key); // Érvényes kulcsok
+        const data = validEntries.map(([, value]) => value.length); // Érvényes értékek
+
         chartInstance = new Chart(ctx, {
           type: 'bar',
           data: {
-            labels: Object.keys(props.entries),
+            labels: labels,
             datasets: [{
               label: 'Bejegyzések száma',
-              data: Object.values(props.entries).map(userEntries => userEntries.length),
+              data: data,
               backgroundColor: 'rgb(234 179 8)',
               borderColor: 'rgb(234 179 8)',
               borderWidth: 1,
@@ -53,6 +67,7 @@ export default {
           },
           options: {
             responsive: true,
+            maintainAspectRatio: false,
             scales: {
               y: {
                 beginAtZero: true,
@@ -66,7 +81,19 @@ export default {
     watch(
       () => props.entries,
       (newEntries) => {
-        totalEntries.value = Object.values(newEntries).flat().length;
+        // Szűrjük az érvényes bejegyzéseket
+        totalEntries.value = Object.entries(newEntries)
+          .filter(([key, value]) => {
+            return (
+              key !== undefined &&
+              key !== null &&
+              key !== '' &&
+              Array.isArray(value) &&
+              value.length > 0
+            );
+          })
+          .flatMap(([, value]) => value).length;
+
         createChart();
       },
       { immediate: true }
@@ -76,7 +103,6 @@ export default {
       createChart();
     });
 
-    // Diagram példány eltávolítása a komponens eltávolítása előtt
     onBeforeUnmount(() => {
       if (chartInstance) {
         chartInstance.destroy();
@@ -91,9 +117,4 @@ export default {
 };
 </script>
 
-<style scoped>
-canvas {
-  max-width: 600px;
-  margin: auto;
-}
-</style>
+

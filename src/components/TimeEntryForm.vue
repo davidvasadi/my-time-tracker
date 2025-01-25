@@ -12,16 +12,19 @@
         <input v-model="formData.date" type="date" id="date" required
                class="mt-1 block w-full p-2 border border-gray-300 rounded"/>
       </div>
-      <div class="mb-4">
-        <label for="startTime" class="block text-sm font-medium text-gray-700">Kezdési idő</label>
-        <input v-model="formData.startTime" type="time" id="startTime" required
-               class="mt-1 block w-full p-2 border border-gray-300 rounded"/>
+      <div class="flex flex-wrap gap-6">
+        <div class="mb-4 flex-1">
+          <label for="startTime" class="block text-sm font-medium text-gray-700">Kezdési idő</label>
+          <input v-model="formData.startTime" type="time" id="startTime" required
+                class="mt-1 block w-full p-2 border border-gray-300 rounded"/>
+        </div>
+        <div class="mb-4 flex-1">
+          <label for="endTime" class="block text-sm font-medium text-gray-700">Befejezési idő</label>
+          <input v-model="formData.endTime" type="time" id="endTime" required
+                class="mt-1 block w-full p-2 border border-gray-300 rounded"/>
+        </div>
       </div>
-      <div class="mb-4">
-        <label for="endTime" class="block text-sm font-medium text-gray-700">Befejezési idő</label>
-        <input v-model="formData.endTime" type="time" id="endTime" required
-               class="mt-1 block w-full p-2 border border-gray-300 rounded"/>
-      </div>
+      
       <div class="mb-4">
         <label for="taskDescription" class="block text-sm font-medium text-gray-700">Feladat leírása</label>
         <textarea v-model="formData.taskDescription" id="taskDescription" rows="3" required
