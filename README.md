@@ -30,21 +30,20 @@ npm run serve
 
 # Build for production
 npm run build
+```
 
-## Author
+## 👤 Author
 
 Created by: **David Vasadi**  
-[Visit my website](https://davelopment.hu),(https://davidvasadi.github.io/my-time-tracker/)
+[Visit my website](https://davelopment.hu) • [Live demo](https://davidvasadi.github.io/my-time-tracker/)
 
-
-------
-
+---
 
 # ⏱️ Time Tracker – Időnyilvántartó rendszer
 
 **Megtekintés:** [Time Tracker](https://davidvasadi.github.io/my-time-tracker/)
 
-Egyszerű és hatékony időnyilvántartó alkalmazás, amely Vue.js segítségével készült. Ideális projektek, napi feladatok és munkaidő követésére, az adatokat a böngésző localStorage-ában tárolja.
+Egyszerű és hatékony időnyilvántartó alkalmazás, amely Vue.js segítségével készült. Ideális projektek, napi feladatok és munkaidő követésére. Az adatokat a böngésző localStorage-ában tárolja, így nincs szükség háttérszerverre.
 
 ## 🌟 Főbb funkciók:
 
@@ -73,5 +72,8 @@ npm run serve
 # Build készítése éles környezetre
 npm run build
 ```
-Created by: **Dávid Vasadi**  
-[Látogass el a weboldalamra](https://davelopment.hu),(https://davidvasadi.github.io/my-time-tracker/)
+
+## 👤 Szerző
+
+Készítette: **Vasadi Dávid**  
+[Látogass el a weboldalamra](https://davelopment.hu) • [Élő demó](https://davidvasadi.github.io/my-time-tracker/)
