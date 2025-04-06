@@ -37,7 +37,11 @@ npm run build
 
 Created by: **David Vasadi**  
 [Visit my website](https://davelopment.hu),(https://davidvasadi.github.io/my-time-tracker/)
----
+
+
+------
+
+
 
 # ⏱️ Time Tracker – Időnyilvántartó rendszer
 **Megtekintés:**[Time Tracker](https://davidvasadi.github.io/my-time-tracker/)
